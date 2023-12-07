@@ -1,10 +1,10 @@
 package com.yasingok.instagram;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -12,7 +12,10 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.TooltipCompat;
 
 import com.yasingok.instagram.databinding.ActivityLoginBinding;
 
@@ -39,8 +42,9 @@ public class Login extends AppCompatActivity {
         ClickableSpan clickableSpan = new ClickableSpan() {     // SIGN UP KISMI
             @Override
             public void onClick(@NonNull View view) {
-                loginBinding.OrText.setText("Sign up");
-                //Toast.makeText(Login.this, "Sign Up clicked", Toast.LENGTH_LONG).show();
+                Intent loginintent = new Intent(Login.this, SignUp.class);
+                startActivity(loginintent);
+                //loginBinding.OrText.setText("Sign up");
             }
         };
         spannableString.setSpan(clickableSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -54,16 +58,36 @@ public class Login extends AppCompatActivity {
 
     public void apiLogin(View view){
         loginBinding.OrText.setText("apiLogin");
-        //Toast.makeText(Login.this, "Api Login clicked", Toast.LENGTH_LONG).show();
     }
 
     public void forgotPassword(View view){
         loginBinding.OrText.setText("forgotPassword");
-        //Toast.makeText(Login.this, "Forgot Password clicked", Toast.LENGTH_LONG).show();
     }
 
     public void login(View view){
         loginBinding.OrText.setText("Login");
-        //Toast.makeText(Login.this, "Login clicked", Toast.LENGTH_LONG).show();
+    }
+
+    public void showHide(View view){
+        loginBinding.OrText.setText("showHide");
+        if (loginBinding.passwordText.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+            // Şifre görünürse, gizle
+            loginBinding.passwordText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            loginBinding.gozSimgesi.setImageResource(R.drawable.show);
+        } else {
+            // Şifre gizliyse, görünür yap
+            loginBinding.passwordText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            loginBinding.gozSimgesi.setImageResource(R.drawable.hide);
+        }
+        // İmleci en sonda tutmak için
+        loginBinding.passwordText.setSelection(loginBinding.passwordText.getText().length());
+
+        // Tooltip gösterme
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String tooltipText = loginBinding.passwordText.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                    ? "Hide"
+                    : "Show";
+            TooltipCompat.setTooltipText(loginBinding.gozSimgesi, tooltipText);
+        }
     }
 }

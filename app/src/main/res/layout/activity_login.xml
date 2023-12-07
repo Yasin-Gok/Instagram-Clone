@@ -95,16 +95,17 @@
         app:layout_constraintTop_toBottomOf="@+id/OrLayout">
 
         <EditText
+            android:id="@+id/mailText"
             android:layout_width="330dp"
             android:layout_height="42dp"
             android:layout_margin="5dp"
-            android:hint="phone number, username or email">
+            android:hint="Phone number, username or email">
         </EditText>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/passLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/logintext"
@@ -113,11 +114,22 @@
         app:layout_constraintTop_toBottomOf="@+id/mailLayout">
 
         <EditText
-            android:layout_width="330dp"
+            android:id="@+id/passwordText"
+            android:layout_width="290dp"
             android:layout_height="42dp"
             android:layout_margin="5dp"
-            android:hint="password">
+            android:hint="Password"
+            android:inputType="textPassword">
         </EditText>
+
+        <ImageView
+            android:id="@+id/gozSimgesi"
+            android:clickable="true"
+            android:onClick="showHide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/show">
+        </ImageView>
     </LinearLayout>
 
     <TextView
@@ -131,14 +143,13 @@
         android:text="Forgot password?"
         android:textColor="@color/forgot_password__color"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/passLayout"
         app:layout_constraintTop_toBottomOf="@+id/passLayout">
     </TextView>
 
     <LinearLayout
         android:id="@+id/loginLayout"
-        android:layout_width="330dp"
+        android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_marginTop="20dp"
         android:alpha="0.36000001430511"
@@ -160,7 +171,6 @@
             android:textColor="@color/log_in_color"
             android:textSize="18sp">
         </TextView>
-
     </LinearLayout>
 
     <TextView
