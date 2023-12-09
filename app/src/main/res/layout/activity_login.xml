@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:src="@drawable/vector_ek1"
+        android:contentDescription="Instagram logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -126,6 +127,7 @@
             android:id="@+id/gozSimgesi"
             android:clickable="true"
             android:onClick="showHide"
+            android:contentDescription="Show or hide password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/show">

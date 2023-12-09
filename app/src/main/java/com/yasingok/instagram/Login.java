@@ -1,5 +1,6 @@
 package com.yasingok.instagram;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -17,16 +18,34 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.TooltipCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.yasingok.instagram.databinding.ActivityLoginBinding;
 
 public class Login extends AppCompatActivity {
     private ActivityLoginBinding loginBinding;
+    private FirebaseAuth auth;
+    private AlertDialog.Builder alertDialogBuilder;
+    private Intent intentLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(loginBinding.getRoot());
+
+        auth = FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        if (firebaseUser != null){
+            intentLogin = new Intent(Login.this, Main.class);
+            startActivity(intentLogin);
+        }
+
+        alertDialogBuilder = new AlertDialog.Builder(Login.this);
 
         // TextView içindeki metni al
         String fullText = loginBinding.signUpText.getText().toString();
@@ -44,7 +63,6 @@ public class Login extends AppCompatActivity {
             public void onClick(@NonNull View view) {
                 Intent loginintent = new Intent(Login.this, SignUp.class);
                 startActivity(loginintent);
-                //loginBinding.OrText.setText("Sign up");
             }
         };
         spannableString.setSpan(clickableSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -57,7 +75,10 @@ public class Login extends AppCompatActivity {
     }
 
     public void apiLogin(View view){
-        loginBinding.OrText.setText("apiLogin");
+        alertDialogBuilder.setTitle("Info");
+        alertDialogBuilder.setMessage("ApiLogin Completed Succesfully");
+        alertDialogBuilder.setPositiveButton("Okay", null); // Tamam butonu ekleyebilirsiniz
+        alertDialogBuilder.show();
     }
 
     public void forgotPassword(View view){
@@ -65,11 +86,41 @@ public class Login extends AppCompatActivity {
     }
 
     public void login(View view){
-        loginBinding.OrText.setText("Login");
+        String mail = loginBinding.mailText.getText().toString();
+        String pass = loginBinding.passwordText.getText().toString();
+
+        if (mail.equals("") || pass.equals("")){
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage("Fill all the blanks");
+            alertDialogBuilder.setPositiveButton("Okay", null); // Tamam butonu ekleyebilirsiniz
+            alertDialogBuilder.show();
+        }
+        else {
+            auth.signInWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        alertDialogBuilder.setTitle("Info");
+                        alertDialogBuilder.setMessage("Login Completed Succesfully");
+                        alertDialogBuilder.setPositiveButton("Okay", null); // Tamam butonu ekleyebilirsiniz
+                        alertDialogBuilder.show();
+
+                        intentLogin = new Intent(Login.this, Main.class);
+                        startActivity(intentLogin);
+                        finish();
+                    }
+                    else{
+                        alertDialogBuilder.setTitle("Error");
+                        alertDialogBuilder.setMessage(task.getException().getLocalizedMessage());
+                        alertDialogBuilder.setPositiveButton("Okay", null); // Tamam butonu ekleyebilirsiniz
+                        alertDialogBuilder.show();
+                    }
+                }
+            });
+        }
     }
 
     public void showHide(View view){
-        loginBinding.OrText.setText("showHide");
         if (loginBinding.passwordText.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
             // Şifre görünürse, gizle
             loginBinding.passwordText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);

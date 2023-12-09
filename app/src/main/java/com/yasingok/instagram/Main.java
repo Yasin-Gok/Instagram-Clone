@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.yasingok.instagram.databinding.ActivityMainBinding;
 
 public class Main extends AppCompatActivity {
@@ -33,7 +36,6 @@ public class Main extends AppCompatActivity {
             } else if (itemId == R.id.fab) {
                 replaceFragment(new UploadFragment());
             }
-
             return true;
         });
     }
@@ -46,12 +48,18 @@ public class Main extends AppCompatActivity {
     }
 
     public void uploadImage(View view) {
-        //mainBinding.setText("Upload");
         Log.d("UploadFragment", "Upload method called");
     }
 
     public void selectImage(View view){
-        //mainBinding.commentText.setText("Image");
         Log.d("UploadFragment", "Select called");
+    }
+
+    public void profileImage(View view) {
+        Log.d("UploadFragment", "Select called");
+    }
+
+    public void showMenu(View view) {
+        Log.d("ProfileFragment", "Menu called");
     }
 }

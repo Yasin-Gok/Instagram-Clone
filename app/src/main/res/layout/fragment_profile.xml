@@ -14,16 +14,18 @@
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="40dp"
         app:cardCornerRadius="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/usernameText">
 
         <ImageView
             android:id="@+id/profil"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:onClick="profileImage"
+            android:contentDescription="Profile photo"
             android:src="@drawable/vector_ek1" />
     </androidx.cardview.widget.CardView>
 
@@ -31,21 +33,20 @@
         android:id="@+id/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Name Surname"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
         android:id="@+id/usernameText"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="25dp"
         android:text="Username"
         android:textSize="30sp"
@@ -58,11 +59,170 @@
         android:id="@+id/tablo"
         android:layout_width="63dp"
         android:layout_height="52dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/table"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.264"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProfile" />
+
+    <ImageView
+        android:id="@+id/video"
+        android:layout_width="63dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/baseline_play_circle_outline_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tablo"
+        app:layout_constraintTop_toTopOf="@+id/tablo" />
+
+    <LinearLayout
+        android:id="@+id/gonderiLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView"> <!-- Elemanları dikey olarak düzenle -->
+
+        <TextView
+            android:id="@+id/gonderiSayi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="5"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/gonderiText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/takipciLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@+id/gonderiLayout"
+        app:layout_constraintTop_toTopOf="@+id/cardView"> <!-- Elemanları dikey olarak düzenle -->
+
+        <TextView
+            android:id="@+id/takipciSayi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="5"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/takipciText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Follower"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/takipLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@+id/takipciLayout"
+        app:layout_constraintTop_toTopOf="@+id/cardView"> <!-- Elemanları dikey olarak düzenle -->
+
+        <TextView
+            android:id="@+id/takipSayi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="5"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/takipText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Following"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/moreImage"
+        android:layout_width="40dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="25dp"
+        android:src="@drawable/more"
+        app:layout_constraintEnd_toStartOf="@+id/menuImage"
+        app:layout_constraintTop_toTopOf="@+id/menuImage" />
+
+    <ImageView
+        android:id="@+id/menuImage"
+        android:layout_width="40dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:src="@drawable/menu"
+        android:onClick="showMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/editProfile"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/profiletext"
+        android:gravity="center"
+        android:text="Edit Profile"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
+
+    <TextView
+        android:id="@+id/shareProfile"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/profiletext"
+        android:gravity="center"
+        android:text="Share Profile"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/editProfile"
+        app:layout_constraintStart_toEndOf="@+id/editProfile"
+        app:layout_constraintTop_toTopOf="@+id/editProfile" />
+
+    <ImageView
+        android:id="@+id/invite"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:background="@android:color/darker_gray"
+        android:src="@drawable/invite"
+        app:layout_constraintBottom_toBottomOf="@+id/shareProfile"
+        app:layout_constraintStart_toEndOf="@+id/shareProfile"
+        app:layout_constraintTop_toTopOf="@+id/shareProfile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
