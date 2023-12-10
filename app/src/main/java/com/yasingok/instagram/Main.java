@@ -1,17 +1,14 @@
 package com.yasingok.instagram;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.yasingok.instagram.databinding.ActivityMainBinding;
 
 public class Main extends AppCompatActivity {
@@ -56,10 +53,14 @@ public class Main extends AppCompatActivity {
     }
 
     public void profileImage(View view) {
-        Log.d("UploadFragment", "Select called");
+        Log.d("ProfileFragment", "Profile image called");
     }
 
     public void showMenu(View view) {
         Log.d("ProfileFragment", "Menu called");
+    }
+
+    public void uploadProfile(View view){
+        Log.d("ProfileFragment", "Upload Profile called");
     }
 }

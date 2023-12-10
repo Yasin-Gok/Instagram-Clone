@@ -1,6 +1,7 @@
 package com.yasingok.instagram;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -13,6 +14,8 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +33,7 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth auth;
     private AlertDialog.Builder alertDialogBuilder;
     private Intent intentLogin;
+    Animation animation;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,9 @@ public class Login extends AppCompatActivity {
         }
 
         alertDialogBuilder = new AlertDialog.Builder(Login.this);
+
+        // Animasyon kaynağını yükle
+        animation = AnimationUtils.loadAnimation(this, R.anim.animation);
 
         // TextView içindeki metni al
         String fullText = loginBinding.signUpText.getText().toString();
@@ -82,10 +89,13 @@ public class Login extends AppCompatActivity {
     }
 
     public void forgotPassword(View view){
-        loginBinding.OrText.setText("forgotPassword");
+        Intent intentToPassword = new Intent(this, Password.class);
+        startActivity(intentToPassword);
     }
 
     public void login(View view){
+        loginBinding.loginLayout.startAnimation(animation);
+
         String mail = loginBinding.mailText.getText().toString();
         String pass = loginBinding.passwordText.getText().toString();
 
@@ -102,12 +112,15 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()){
                         alertDialogBuilder.setTitle("Info");
                         alertDialogBuilder.setMessage("Login Completed Succesfully");
-                        alertDialogBuilder.setPositiveButton("Okay", null); // Tamam butonu ekleyebilirsiniz
+                        alertDialogBuilder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                intentLogin = new Intent(Login.this, Main.class);
+                                startActivity(intentLogin);
+                                finish();
+                            }
+                        }); // Tamam butonu ekleyebilirsiniz
                         alertDialogBuilder.show();
-
-                        intentLogin = new Intent(Login.this, Main.class);
-                        startActivity(intentLogin);
-                        finish();
                     }
                     else{
                         alertDialogBuilder.setTitle("Error");

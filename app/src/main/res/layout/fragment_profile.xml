@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ProfileFragment">
 
-
-
     <!-- TODO: Update blank fragment layout -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -49,7 +47,7 @@
         android:layout_marginStart="45dp"
         android:layout_marginTop="25dp"
         android:text="Username"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -191,10 +189,11 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/profiletext"
         android:gravity="center"
-        android:text="Edit Profile"
+        android:text="Upload Profile"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:onClick="uploadProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
@@ -218,11 +217,10 @@
         android:layout_width="45dp"
         android:layout_height="30dp"
         android:layout_marginStart="25dp"
-        android:background="@android:color/darker_gray"
+        android:background="#e0dddd"
         android:src="@drawable/invite"
         app:layout_constraintBottom_toBottomOf="@+id/shareProfile"
         app:layout_constraintStart_toEndOf="@+id/shareProfile"
         app:layout_constraintTop_toTopOf="@+id/shareProfile" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
